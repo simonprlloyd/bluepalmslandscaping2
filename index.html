@@ -151,6 +151,282 @@
     box-shadow: 0 0 24px var(--cyan-glow);
   }
 
+  /* ===== HAMBURGER (mobile only) ===== */
+  .nav-toggle {
+    display: none;
+    background: var(--dark-card);
+    border: 1px solid var(--cyan);
+    border-radius: 8px;
+    width: 44px; height: 44px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    z-index: 121;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px rgba(74, 214, 232, 0.2);
+  }
+
+  .nav-toggle:hover { background: var(--cyan); }
+  .nav-toggle:hover span { background: var(--dark); }
+
+  .nav-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--cyan);
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Animated X when menu is open */
+  body.menu-open .nav-toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  body.menu-open .nav-toggle span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  body.menu-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  /* ===== MOBILE MENU OVERLAY ===== */
+  .mobile-menu {
+    position: fixed;
+    top: 0; right: 0;
+    width: 100%;
+    max-width: 420px;
+    height: 100vh;
+    height: 100dvh;
+    background: var(--dark);
+    z-index: 120;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--cyan);
+    box-shadow: -20px 0 60px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+  }
+
+  body.menu-open .mobile-menu { transform: translateX(0); }
+
+  /* Backdrop dim */
+  body.menu-open::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 119;
+    backdrop-filter: blur(4px);
+    animation: backdropIn 0.3s ease-out;
+  }
+
+  @keyframes backdropIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  body.menu-open { overflow: hidden; }
+
+  .mobile-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.3rem 1.5rem;
+    border-bottom: 1px solid var(--line-light-on-dark);
+    flex-shrink: 0;
+  }
+
+  .mobile-menu-close {
+    background: transparent;
+    border: 1px solid var(--line-light-on-dark);
+    color: var(--ink);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    width: 38px; height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 300;
+    transition: all 0.2s;
+  }
+
+  .mobile-menu-close:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+  }
+
+  .mobile-menu-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .mobile-menu-label {
+    color: var(--cyan);
+    font-size: 0.68rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    padding-left: 0.3rem;
+    opacity: 0;
+    animation: menuItemIn 0.4s 0.1s forwards;
+  }
+
+  .mobile-menu-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.1rem;
+    background: var(--dark-card);
+    border: 1px solid var(--line-light-on-dark);
+    border-radius: 10px;
+    color: var(--ink);
+    text-decoration: none;
+    transition: all 0.25s;
+    opacity: 0;
+    transform: translateX(20px);
+    animation: menuItemIn 0.4s forwards;
+  }
+
+  .mobile-menu-link:nth-child(2) { animation-delay: 0.12s; }
+  .mobile-menu-link:nth-child(3) { animation-delay: 0.17s; }
+  .mobile-menu-link:nth-child(4) { animation-delay: 0.22s; }
+  .mobile-menu-link:nth-child(5) { animation-delay: 0.27s; }
+  .mobile-menu-link:nth-child(6) { animation-delay: 0.32s; }
+  .mobile-menu-link:nth-child(7) { animation-delay: 0.37s; }
+
+  @keyframes menuItemIn {
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .mobile-menu-link:active,
+  .mobile-menu-link:hover {
+    background: var(--dark-soft);
+    border-color: var(--cyan);
+    transform: translateX(-3px);
+  }
+
+  .mobile-menu-link .m-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: rgba(74, 214, 232, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-menu-link > div { flex: 1; min-width: 0; }
+
+  .mobile-menu-link .m-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 0.15rem;
+  }
+
+  .mobile-menu-link .m-sub {
+    color: var(--ink-mute);
+    font-size: 0.8rem;
+  }
+
+  .mobile-menu-link .m-arrow {
+    color: var(--cyan);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    transition: transform 0.25s;
+  }
+
+  .mobile-menu-link:hover .m-arrow { transform: translateX(4px); }
+
+  .mobile-menu-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+    opacity: 0;
+    animation: menuItemIn 0.4s 0.45s forwards;
+  }
+
+  .mobile-menu-call,
+  .mobile-menu-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 1.1rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+
+  .mobile-menu-call {
+    background: var(--cyan);
+    color: var(--dark);
+    box-shadow: 0 4px 16px var(--cyan-glow);
+  }
+
+  .mobile-menu-call:active,
+  .mobile-menu-call:hover {
+    background: #fff;
+    transform: translateY(-2px);
+  }
+
+  .mobile-menu-text {
+    background: transparent;
+    color: var(--cyan);
+    border: 1px solid var(--cyan);
+  }
+
+  .mobile-menu-text:active,
+  .mobile-menu-text:hover {
+    background: var(--cyan);
+    color: var(--dark);
+  }
+
+  .mobile-menu-promo {
+    margin-top: 1.2rem;
+    padding: 1rem;
+    background: #fff;
+    color: #000;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.88rem;
+    border: 2px solid var(--cyan);
+    box-shadow: 0 0 30px var(--cyan-glow);
+    opacity: 0;
+    animation: menuItemIn 0.4s 0.5s forwards;
+  }
+
+  .mobile-menu-promo strong {
+    color: var(--cyan-deep);
+    font-weight: 800;
+    letter-spacing: 0.05em;
+  }
+
+  .mobile-menu-promo code {
+    background: var(--cyan);
+    color: #000;
+    padding: 0.15rem 0.55rem;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    margin-left: 0.3rem;
+    letter-spacing: 0.08em;
+    font-size: 0.82rem;
+  }
+
   /* ===== HERO with VIDEO ===== */
   .hero {
     min-height: 100vh;
@@ -1194,7 +1470,356 @@
     line-height: 1.55;
   }
 
-  /* ===== PHILOSOPHY (dark, big quote) ===== */
+  /* ===== SEASONAL RECOMMENDATIONS ===== */
+  .seasonal {
+    padding: 8rem 3rem;
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Decorative seasonal backdrop gradient */
+  .seasonal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at top right, rgba(74, 214, 232, 0.08), transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(27, 169, 189, 0.06), transparent 50%);
+    pointer-events: none;
+  }
+
+  .seasonal-inner { max-width: 1300px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* Season header strip — emoji badge + current season name */
+  .season-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: var(--dark-card);
+    border: 1px solid var(--cyan);
+    padding: 0.7rem 1.3rem;
+    border-radius: 999px;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 30px rgba(74, 214, 232, 0.15);
+    animation: badgeGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes badgeGlow {
+    0%, 100% { box-shadow: 0 0 20px rgba(74, 214, 232, 0.15); }
+    50% { box-shadow: 0 0 35px rgba(74, 214, 232, 0.35); }
+  }
+
+  .season-badge .emoji {
+    font-size: 1.4rem;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-4px) rotate(5deg); }
+  }
+
+  .season-badge .label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  .season-badge .label strong {
+    color: var(--cyan);
+    font-weight: 700;
+  }
+
+  .seasonal h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5.5vw, 5rem);
+    line-height: 1;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    max-width: 1000px;
+  }
+
+  .seasonal h2 .italic { color: var(--cyan); font-weight: 400; }
+
+  .seasonal-pitch {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.2rem;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin-bottom: 4rem;
+    line-height: 1.6;
+  }
+
+  /* Season cards grid */
+  .seasonal-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.4rem;
+  }
+
+  .season-card {
+    background: var(--dark-card);
+    border: 1px solid var(--line-light-on-dark);
+    border-radius: 12px;
+    padding: 2rem 1.8rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+  }
+
+  .season-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity: 0.5;
+    transform: scaleX(0.3);
+    transition: transform 0.4s, opacity 0.4s;
+  }
+
+  .season-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--cyan);
+    box-shadow: 0 24px 50px rgba(74, 214, 232, 0.18);
+  }
+
+  .season-card:hover::before {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+
+  /* Highlighted "current season" card */
+  .season-card.now {
+    background: linear-gradient(160deg, rgba(74, 214, 232, 0.12), var(--dark-card) 60%);
+    border-color: var(--cyan);
+    box-shadow: 0 0 40px rgba(74, 214, 232, 0.2);
+  }
+
+  .season-card.now::before {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+
+  .season-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+
+  .season-card-icon {
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .season-card.now .season-card-icon {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .season-card-tag {
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--ink-mute);
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid var(--line-light-on-dark);
+  }
+
+  .season-card.now .season-card-tag {
+    background: var(--cyan);
+    color: var(--dark);
+    border-color: var(--cyan);
+    animation: nowPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes nowPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(74, 214, 232, 0.6); }
+    50% { box-shadow: 0 0 0 6px rgba(74, 214, 232, 0); }
+  }
+
+  .season-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: #fff;
+    margin-bottom: 0.4rem;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  .season-card-months {
+    color: var(--ink-mute);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 1.3rem;
+    font-weight: 500;
+  }
+
+  .season-card-services {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+    border-top: 1px solid var(--line-light-on-dark);
+    padding-top: 1.2rem;
+  }
+
+  .season-card-services li {
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+    padding: 0.45rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    line-height: 1.4;
+  }
+
+  .season-card-services li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--cyan);
+    flex-shrink: 0;
+  }
+
+  .season-card.now .season-card-services li { color: #fff; }
+
+  .season-card-cta {
+    margin-top: 1.3rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--line-light-on-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .season-card-cta a {
+    color: var(--cyan);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: gap 0.3s;
+  }
+
+  .season-card-cta a:hover { gap: 0.7rem; }
+
+  .season-card.now .season-card-cta { border-top-color: rgba(74, 214, 232, 0.3); }
+
+  /* Big call-out CTA below grid for current season */
+  .seasonal-cta {
+    margin-top: 3.5rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--cyan-deep) 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .seasonal-cta::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -10%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transform: rotate(15deg);
+    animation: ctaShimmer 4s ease-in-out infinite;
+  }
+
+  @keyframes ctaShimmer {
+    0% { left: -50%; }
+    100% { left: 150%; }
+  }
+
+  .seasonal-cta-text {
+    flex: 1;
+    min-width: 280px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .seasonal-cta-text strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: #000;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .seasonal-cta-text span {
+    color: rgba(0,0,0,0.75);
+    font-size: 0.95rem;
+  }
+
+  .seasonal-cta-buttons {
+    display: flex;
+    gap: 0.8rem;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+  }
+
+  .seasonal-cta-btn {
+    background: var(--dark);
+    color: #fff;
+    padding: 1rem 1.6rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .seasonal-cta-btn:hover {
+    background: #fff;
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .seasonal-cta-btn.alt {
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+  }
+
+  .seasonal-cta-btn.alt:hover {
+    background: var(--dark);
+    border-color: var(--dark);
+  }
+
+
   .philosophy {
     padding: 10rem 3rem;
     position: relative;
@@ -1878,13 +2503,17 @@
   /* ===== RESPONSIVE ===== */
   @media (max-width: 980px) {
     nav { padding: 1rem 1.3rem; }
-    .nav-links { gap: 1.2rem; }
-    .nav-links li:not(:last-child) { display: none; }
+    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
     .section, .hero, .philosophy, .instagram, .service-area, .testimonials-section, .contact-section { padding-left: 1.3rem; padding-right: 1.3rem; }
     .work-gallery { grid-template-columns: 1fr; }
     .work-tile { aspect-ratio: 16/10; }
     .service-menu { aspect-ratio: auto; }
     .process-grid { grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem; }
+    .seasonal-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .seasonal-cta { flex-direction: column; align-items: stretch; text-align: center; }
+    .seasonal-cta-text strong { font-size: 1.3rem; }
+    .seasonal-cta-buttons { justify-content: center; }
     .insta-grid { grid-template-columns: 1fr; gap: 4rem; }
     .insta-phone { order: -1; }
     .area-grid { grid-template-columns: 1fr; }
@@ -1911,6 +2540,7 @@
     .contact-big-btn { padding: 1.4rem 1.4rem; gap: 1rem; }
     .contact-big-icon { width: 50px; height: 50px; }
     .contact-big-number { font-size: 1.3rem; }
+    .seasonal-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -1935,11 +2565,90 @@
   </a>
   <ul class="nav-links">
     <li><a href="#work">Work &amp; Services</a></li>
+    <li><a href="#seasonal">By Season</a></li>
     <li><a href="#philosophy">Philosophy</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="tel:4104744838" class="nav-phone">(410) 474-4838 →</a></li>
   </ul>
+
+  <!-- Hamburger button (mobile only) -->
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" onclick="toggleMobileMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </nav>
+
+<!-- ===== MOBILE MENU OVERLAY ===== -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <div class="logo">
+      <div class="logo-mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M12 22V13" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M12 13C12 13 8 9 4 9C4 9 5 12 8 13C5 12 5 16 8 17" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 13C12 13 16 9 20 9C20 9 19 12 16 13C19 12 19 16 16 17" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 13C12 13 10 7 6 5C6 5 8 9 10 9" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 13C12 13 14 7 18 5C18 5 16 9 14 9" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-text">BLUE PALMS</div>
+        <div class="logo-sub">Premium Outdoor Care</div>
+      </div>
+    </div>
+    <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Close menu">×</button>
+  </div>
+
+  <div class="mobile-menu-body">
+    <div class="mobile-menu-label">Jump to a section</div>
+    <a href="#work" class="mobile-menu-link" onclick="toggleMobileMenu()">
+      <span class="m-icon">🎬</span>
+      <div><div class="m-title">Work &amp; Services</div><div class="m-sub">See the craft in motion</div></div>
+      <span class="m-arrow">→</span>
+    </a>
+    <a href="#seasonal" class="mobile-menu-link" onclick="toggleMobileMenu()">
+      <span class="m-icon" id="mobileSeasonIcon">🌱</span>
+      <div><div class="m-title">By Season</div><div class="m-sub">What to book right now</div></div>
+      <span class="m-arrow">→</span>
+    </a>
+    <a href="#philosophy" class="mobile-menu-link" onclick="toggleMobileMenu()">
+      <span class="m-icon">✦</span>
+      <div><div class="m-title">Philosophy</div><div class="m-sub">How we treat your property</div></div>
+      <span class="m-arrow">→</span>
+    </a>
+    <a href="#process" class="mobile-menu-link" onclick="toggleMobileMenu()">
+      <span class="m-icon">📋</span>
+      <div><div class="m-title">How It Works</div><div class="m-sub">From first call to finished</div></div>
+      <span class="m-arrow">→</span>
+    </a>
+    <a href="#service-area" class="mobile-menu-link" onclick="toggleMobileMenu()">
+      <span class="m-icon">📍</span>
+      <div><div class="m-title">Service Area</div><div class="m-sub">Maryland coverage map</div></div>
+      <span class="m-arrow">→</span>
+    </a>
+    <a href="#contact" class="mobile-menu-link" onclick="toggleMobileMenu()">
+      <span class="m-icon">💬</span>
+      <div><div class="m-title">Contact</div><div class="m-sub">Call or text us</div></div>
+      <span class="m-arrow">→</span>
+    </a>
+
+    <div class="mobile-menu-cta">
+      <a href="tel:4104744838" class="mobile-menu-call">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call (410) 474-4838
+      </a>
+      <a href="sms:4104744838" class="mobile-menu-text">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Text us
+      </a>
+    </div>
+
+    <div class="mobile-menu-promo">
+      <strong>25% OFF</strong> first service with code <code>FIRST25</code>
+    </div>
+  </div>
+</div>
 
 <!-- ===== FLOATING CONTACT ===== -->
 <!-- ===== TOP PROMO BAR (25% OFF) ===== -->
@@ -2132,7 +2841,34 @@
   </div>
 </section>
 
-<!-- ===== PHILOSOPHY (dark, big quote) ===== -->
+<!-- ===== SEASONAL RECOMMENDATIONS ===== -->
+<section class="seasonal" id="seasonal">
+  <div class="seasonal-inner">
+    <div class="season-badge">
+      <span class="emoji" id="seasonEmoji">🌱</span>
+      <span class="label">Right now: <strong id="seasonLabel">Spring</strong> · <span id="seasonMonth">May</span></span>
+    </div>
+
+    <h2 class="display">Built for the <span class="italic" id="seasonHeadline">season.</span></h2>
+    <p class="seasonal-pitch" id="seasonalPitch">Every yard has a rhythm. Here's what we recommend booking right now — and what's coming next.</p>
+
+    <div class="seasonal-grid" id="seasonalGrid">
+      <!-- 4 season cards injected by JS, current season auto-highlighted -->
+    </div>
+
+    <div class="seasonal-cta">
+      <div class="seasonal-cta-text">
+        <strong id="seasonalCtaTitle">Lock in your seasonal service — 25% off your first.</strong>
+        <span>Code <code style="background:rgba(0,0,0,0.2);padding:0.1rem 0.5rem;border-radius:3px;font-weight:700;">FIRST25</code> auto-applies. Just call or text.</span>
+      </div>
+      <div class="seasonal-cta-buttons">
+        <a href="tel:4104744838" class="seasonal-cta-btn">📞 Call Now</a>
+        <a href="sms:4104744838" class="seasonal-cta-btn alt">💬 Text Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="philosophy dark" id="philosophy">
   <div class="philosophy-inner">
     <div class="quote-mark">"</div>
@@ -2207,7 +2943,7 @@
 </section>
 
 <!-- ===== SERVICE AREA (dark with radar) ===== -->
-<section class="service-area">
+<section class="service-area" id="service-area">
   <div class="area-grid">
     <div class="area-left">
       <span class="section-tag">Service Area</span>
@@ -2397,6 +3133,28 @@
     document.body.classList.add('has-promo');
   }
 
+  // === Mobile menu toggle ===
+  function toggleMobileMenu() {
+    document.body.classList.toggle('menu-open');
+  }
+
+  // Close menu on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('menu-open')) {
+      toggleMobileMenu();
+    }
+  });
+
+  // Close menu when clicking the backdrop (outside the panel)
+  document.addEventListener('click', (e) => {
+    if (!document.body.classList.contains('menu-open')) return;
+    const menu = document.getElementById('mobileMenu');
+    const toggle = document.getElementById('navToggle');
+    if (menu && !menu.contains(e.target) && toggle && !toggle.contains(e.target)) {
+      toggleMobileMenu();
+    }
+  });
+
   // === Seasonal logic ===
   function getSeason() {
     const month = new Date().getMonth(); // 0-11
@@ -2411,7 +3169,9 @@
     spring: {
       emoji: '🌱',
       label: 'Spring',
-      pitch: "Spring is prime time for a fresh start. Here's what's hot right now:",
+      months: 'Mar – May',
+      headline: 'spring rebuild.',
+      pitch: "Spring is prime time for a fresh start. Beds are waking up, weeds are racing in, and your lawn needs its first deep care — here's what we recommend booking now.",
       services: [
         { name: 'Spring Cleanup', why: 'Clear winter debris, prep beds.', tag: '🔥 Most booked' },
         { name: 'Fresh Mulching', why: 'Lock in moisture, beat the weeds.', tag: '✨ Popular' },
@@ -2422,21 +3182,25 @@
     summer: {
       emoji: '☀️',
       label: 'Summer',
-      pitch: "Summer means peak growth. Here's what most folks book in your area:",
+      months: 'Jun – Aug',
+      headline: 'summer peak.',
+      pitch: "Summer means peak growth and peak hangouts. Grass needs weekly attention, patios get heavy use, and weeds will take over if you blink — here's the priority list.",
       services: [
         { name: 'Weekly Grass Cutting', why: 'Crisp lines, every visit.', tag: '🔥 Most booked' },
-        { name: 'Power Washing', why: 'Driveway &amp; patio refresh before BBQ season.', tag: '✨ Popular' },
-        { name: 'Weed Removal', why: 'Stay ahead before they take over.', tag: '⚡ Time-sensitive' },
-        { name: 'Bed Maintenance', why: 'Keep landscaping looking sharp.', tag: '🌿 Now' }
+        { name: 'Power Washing', why: 'Driveway &amp; patio refresh.', tag: '✨ Popular' },
+        { name: 'Weed Removal', why: 'Stay ahead before takeover.', tag: '⚡ Time-sensitive' },
+        { name: 'Bed Maintenance', why: 'Keep landscaping sharp.', tag: '🌿 Now' }
       ]
     },
     fall: {
       emoji: '🍂',
       label: 'Fall',
-      pitch: "Fall prep saves you headaches all winter. Top picks right now:",
+      months: 'Sep – Nov',
+      headline: 'fall reset.',
+      pitch: "Fall prep saves you headaches all winter. Leaves clog gutters, beds get buried, and the last clean mow really matters — here's what to book before frost.",
       services: [
         { name: 'Gutter Cleaning', why: 'Get ahead of leaf clogs.', tag: '🔥 Most booked' },
-        { name: 'Fall Cleanup', why: 'Leaves, branches, beds — all reset.', tag: '✨ Popular' },
+        { name: 'Fall Cleanup', why: 'Leaves, branches, beds — reset.', tag: '✨ Popular' },
         { name: 'Final Mow &amp; Edge', why: 'Last clean cut before frost.', tag: '⏰ Limited window' },
         { name: 'Soft Washing', why: 'Cleanup before holiday guests.', tag: '🌿 Now' }
       ]
@@ -2444,15 +3208,65 @@
     winter: {
       emoji: '❄️',
       label: 'Winter',
-      pitch: "Winter's the smart time to plan ahead. Here's what's available:",
+      months: 'Dec – Feb',
+      headline: 'winter plan.',
+      pitch: "Winter is the smart time to plan ahead. The crew has more availability, design takes thought, and locking in a spring slot early avoids the March rush.",
       services: [
         { name: 'Landscape Design', why: 'Plan the spring rebuild now.', tag: '🔥 Most booked' },
-        { name: 'Gutter Cleaning', why: 'Catch the last leaves before snow.', tag: '✨ Popular' },
-        { name: 'Soft Washing', why: 'Mild-weather days = perfect timing.', tag: '💧 Available' },
-        { name: 'Spring Booking', why: 'Lock in your slot before March rush.', tag: '🎯 Early-bird' }
+        { name: 'Gutter Cleaning', why: 'Last leaves before snow.', tag: '✨ Popular' },
+        { name: 'Soft Washing', why: 'Mild days = perfect timing.', tag: '💧 Available' },
+        { name: 'Early Spring Booking', why: 'Lock your slot before March rush.', tag: '🎯 Early-bird' }
       ]
     }
   };
+
+  // === Render the seasonal recommendations section ===
+  (function renderSeasonal() {
+    const grid = document.getElementById('seasonalGrid');
+    if (!grid) return;
+
+    // Update the header text to reflect current season
+    const currentMonth = new Date().toLocaleString('en-US', { month: 'long' });
+    document.getElementById('seasonEmoji').textContent = SEASON_DATA[SEASON].emoji;
+    document.getElementById('seasonLabel').textContent = SEASON_DATA[SEASON].label;
+    document.getElementById('seasonMonth').textContent = currentMonth;
+    document.getElementById('seasonHeadline').textContent = SEASON_DATA[SEASON].headline;
+    document.getElementById('seasonalPitch').textContent = SEASON_DATA[SEASON].pitch;
+    document.getElementById('seasonalCtaTitle').textContent = `Lock in your ${SEASON_DATA[SEASON].label.toLowerCase()} service — 25% off your first.`;
+
+    // Sync mobile menu icon with current season
+    const mobileIcon = document.getElementById('mobileSeasonIcon');
+    if (mobileIcon) mobileIcon.textContent = SEASON_DATA[SEASON].emoji;
+
+    // Build cards in order, starting from current season
+    const order = ['spring', 'summer', 'fall', 'winter'];
+    const startIdx = order.indexOf(SEASON);
+    const ordered = [...order.slice(startIdx), ...order.slice(0, startIdx)];
+
+    grid.innerHTML = ordered.map((key, i) => {
+      const s = SEASON_DATA[key];
+      const isNow = key === SEASON;
+      const tag = isNow
+        ? '<span class="season-card-tag">● Now</span>'
+        : `<span class="season-card-tag">${i === 1 ? 'Up Next' : 'Later'}</span>`;
+      return `
+        <div class="season-card ${isNow ? 'now' : ''}">
+          <div class="season-card-header">
+            <div class="season-card-icon">${s.emoji}</div>
+            ${tag}
+          </div>
+          <div class="season-card-title">${s.label}</div>
+          <div class="season-card-months">${s.months}</div>
+          <ul class="season-card-services">
+            ${s.services.slice(0, 3).map(svc => `<li>${svc.name}</li>`).join('')}
+          </ul>
+          <div class="season-card-cta">
+            <a href="${isNow ? 'tel:4104744838' : '#seasonal'}">${isNow ? 'Call to Book →' : 'Plan Ahead →'}</a>
+          </div>
+        </div>
+      `;
+    }).join('');
+  })();
 
   // === Chat widget ===
   const chatPanel = document.getElementById('chatPanel');
