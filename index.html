@@ -307,6 +307,137 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
+  /* ===== PROMO BAR (top) ===== */
+  .promo-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 110;
+    background: #ffffff;
+    color: #000000;
+    overflow: hidden;
+    border-bottom: 2px solid var(--cyan);
+    box-shadow: 0 2px 20px rgba(74, 214, 232, 0.25);
+  }
+
+  /* Animated cyan accent strip at bottom edge */
+  .promo-bar::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 30%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    animation: sweepLine 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes sweepLine {
+    0% { left: -30%; }
+    100% { left: 100%; }
+  }
+
+  .promo-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0.7rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-align: center;
+    position: relative;
+    color: #000;
+  }
+
+  .promo-text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: #000;
+  }
+
+  .promo-text strong {
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--cyan-deep);
+    font-size: 0.95rem;
+  }
+
+  .promo-text em {
+    font-style: normal;
+    color: #444;
+  }
+
+  .promo-text code {
+    background: var(--cyan);
+    color: #000;
+    padding: 0.18rem 0.6rem;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+  }
+
+  .promo-phone {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 0.4rem;
+    padding: 0.3rem 0.85rem;
+    background: var(--cyan-deep);
+    border-radius: 999px;
+    transition: all 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    box-shadow: 0 2px 8px rgba(27, 169, 189, 0.3);
+  }
+
+  .promo-phone:hover {
+    transform: scale(1.05);
+    background: var(--cyan);
+    color: #000;
+  }
+
+  .promo-spark {
+    font-size: 1rem;
+    animation: spin 8s linear infinite;
+    display: inline-block;
+    color: var(--cyan-deep);
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .promo-close {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #000;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.4;
+    padding: 0.2rem 0.5rem;
+    font-weight: 300;
+  }
+
+  .promo-close:hover { opacity: 1; }
+
+  /* Push nav down when promo is visible */
+  body.has-promo nav { top: 42px; }
+  body.has-promo .hero { padding-top: 9rem; }
+
   /* ===== FLOATING CONTACT BUBBLES ===== */
   .floating-contact {
     position: fixed;
@@ -315,6 +446,7 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    align-items: flex-end;
   }
 
   .float-btn {
@@ -322,32 +454,39 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 0.8rem;
+    gap: 0.7rem;
     cursor: pointer;
     text-decoration: none;
+    background: none;
+    border: none;
+    padding: 0;
   }
 
-  .float-btn .label {
+  .call-number-label {
     background: rgba(11, 17, 22, 0.95);
-    backdrop-filter: blur(10px);
-    color: var(--ink);
-    padding: 0.7rem 1.2rem;
+    backdrop-filter: blur(12px);
+    color: var(--cyan);
+    padding: 0.6rem 1.1rem;
     border-radius: 999px;
     border: 1px solid var(--cyan);
-    font-size: 0.85rem;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
     white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     transition: all 0.3s;
+    font-family: 'Inter', sans-serif;
   }
 
-  .float-btn:hover .label { background: var(--cyan); color: var(--dark); }
+  .float-btn:hover .call-number-label {
+    background: var(--cyan);
+    color: var(--dark);
+    transform: translateX(-3px);
+  }
 
   .float-icon-wrap {
     position: relative;
-    width: 56px; height: 56px;
+    width: 60px; height: 60px;
     flex-shrink: 0;
   }
 
@@ -361,32 +500,45 @@
   }
 
   .float-icon-wrap::before {
-    transform: scale(1.3);
-    animation: ringPulse 2.5s ease-in-out infinite;
+    animation: ringPulse 2.2s ease-out infinite;
   }
 
   .float-icon-wrap::after {
-    transform: scale(1.6);
-    opacity: 0.2;
-    animation: ringPulse 2.5s 0.5s ease-in-out infinite;
+    animation: ringPulse 2.2s 1.1s ease-out infinite;
   }
 
   @keyframes ringPulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 0.1; }
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.8); opacity: 0; }
   }
 
   .float-icon {
-    width: 56px; height: 56px;
+    width: 60px; height: 60px;
     border-radius: 50%;
     background: var(--cyan);
     color: var(--dark);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 6px 20px var(--cyan-glow);
+    box-shadow: 0 6px 24px var(--cyan-glow);
     position: relative;
     z-index: 1;
+    transition: transform 0.25s;
+  }
+
+  .float-btn:hover .float-icon {
+    transform: scale(1.08) rotate(-5deg);
+    background: #fff;
+  }
+
+  .float-icon-call {
+    animation: wiggle 3s ease-in-out infinite;
+  }
+
+  @keyframes wiggle {
+    0%, 90%, 100% { transform: rotate(0deg); }
+    93% { transform: rotate(-12deg); }
+    96% { transform: rotate(12deg); }
   }
 
   .float-badge {
@@ -394,15 +546,400 @@
     top: -4px; right: -4px;
     background: var(--pink);
     color: #fff;
-    font-size: 0.65rem;
-    font-weight: 600;
-    width: 18px; height: 18px;
-    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: 700;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 999px;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2;
+    box-shadow: 0 0 0 2px var(--dark), 0 0 12px rgba(255, 107, 139, 0.6);
+    animation: badgeBounce 1.6s ease-in-out infinite;
   }
+
+  @keyframes badgeBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+
+  /* ===== CHAT TEASER BUBBLE ===== */
+  .chat-teaser {
+    position: fixed;
+    bottom: 7.5rem;
+    right: 5.5rem;
+    z-index: 91;
+    max-width: 290px;
+    background: linear-gradient(135deg, #fff 0%, #f5f1e8 100%);
+    color: var(--dark);
+    padding: 1rem 1.1rem 1rem 2.8rem;
+    border-radius: 16px 16px 4px 16px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--cyan);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.3);
+    pointer-events: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+  }
+
+  .chat-teaser.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+    animation: teaserNudge 4s ease-in-out 1s infinite;
+  }
+
+  @keyframes teaserNudge {
+    0%, 92%, 100% { transform: translateY(0) scale(1); }
+    95% { transform: translateY(-4px) scale(1.02); }
+    97% { transform: translateY(2px) scale(0.99); }
+  }
+
+  .teaser-text strong { color: var(--cyan-deep); font-weight: 700; }
+  .teaser-text { transition: opacity 0.3s ease; }
+
+  .teaser-avatar {
+    position: absolute;
+    top: 0.9rem;
+    left: 0.85rem;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--dark);
+    border: 1.5px solid var(--cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .teaser-close {
+    position: absolute;
+    top: 4px;
+    right: 7px;
+    background: transparent;
+    border: none;
+    color: var(--ink-dark-soft);
+    font-size: 1.1rem;
+    cursor: pointer;
+    line-height: 1;
+    width: 20px; height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s;
+  }
+
+  .teaser-close:hover { background: rgba(0,0,0,0.08); }
+
+  .teaser-arrow {
+    position: absolute;
+    bottom: -8px;
+    right: 28px;
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(135deg, #fff 0%, #f5f1e8 100%);
+    transform: rotate(45deg);
+    border-bottom-right-radius: 2px;
+    box-shadow: 1px 1px 0 var(--cyan);
+  }
+
+  /* ===== CHAT PANEL ===== */
+  .chat-panel {
+    position: fixed;
+    bottom: 7.5rem;
+    right: 2rem;
+    width: 380px;
+    max-width: calc(100vw - 2rem);
+    height: 580px;
+    max-height: calc(100vh - 9rem);
+    background: var(--dark);
+    border: 1px solid var(--line-cyan);
+    border-radius: 16px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6), 0 0 40px rgba(74, 214, 232, 0.15);
+    z-index: 95;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transform-origin: bottom right;
+    pointer-events: none;
+    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+  }
+
+  .chat-panel.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  .chat-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.1rem 1.2rem;
+    background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-soft) 100%);
+    border-bottom: 1px solid var(--line-cyan);
+    position: relative;
+  }
+
+  .chat-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity: 0.5;
+  }
+
+  .chat-header-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: #000;
+    border: 1.5px solid var(--cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .online-dot {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: #4ade80;
+    border: 2px solid var(--dark);
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+    animation: onlinePulse 2s ease-in-out infinite;
+  }
+
+  @keyframes onlinePulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(74, 222, 128, 0.6); }
+    50% { box-shadow: 0 0 14px rgba(74, 222, 128, 0.9); }
+  }
+
+  .chat-header-text { flex: 1; }
+
+  .chat-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 0.15rem;
+  }
+
+  .chat-status {
+    color: var(--ink-mute);
+    font-size: 0.74rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .live-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: onlinePulse 1.5s ease-in-out infinite;
+  }
+
+  .chat-close {
+    background: transparent;
+    border: none;
+    color: var(--ink-soft);
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    line-height: 1;
+  }
+
+  .chat-close:hover { background: var(--line-light-on-dark); color: #fff; }
+
+  .chat-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--cyan) transparent;
+  }
+
+  .chat-body::-webkit-scrollbar { width: 5px; }
+  .chat-body::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 5px; }
+
+  .msg {
+    max-width: 85%;
+    padding: 0.75rem 1rem;
+    border-radius: 16px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    animation: msgIn 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+  }
+
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .msg.bot {
+    background: var(--dark-card);
+    border: 1px solid var(--line-light-on-dark);
+    color: var(--ink);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+
+  .msg.user {
+    background: var(--cyan);
+    color: var(--dark);
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+    font-weight: 500;
+  }
+
+  .msg.promo {
+    background: linear-gradient(135deg, rgba(74, 214, 232, 0.18), rgba(27, 169, 189, 0.1));
+    border: 1px solid var(--cyan);
+    color: var(--ink);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .msg.promo::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: promoShine 3s ease-in-out infinite;
+  }
+
+  @keyframes promoShine {
+    0% { left: -100%; }
+    50%, 100% { left: 100%; }
+  }
+
+  .msg.promo .promo-badge {
+    display: inline-block;
+    background: var(--cyan);
+    color: var(--dark);
+    padding: 0.15rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    margin-right: 0.4rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* Typing indicator */
+  .typing-dots {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    padding: 0.2rem 0;
+  }
+
+  .typing-dots span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--cyan);
+    animation: typingBounce 1.2s ease-in-out infinite;
+  }
+
+  .typing-dots span:nth-child(2) { animation-delay: 0.15s; }
+  .typing-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+  @keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-5px); opacity: 1; }
+  }
+
+  /* Quick action chips */
+  .chat-quick-actions {
+    padding: 0.6rem 1.2rem 0.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    border-top: 1px solid var(--line-light-on-dark);
+  }
+
+  .chat-chip {
+    background: transparent;
+    border: 1px solid var(--line-cyan);
+    color: var(--cyan);
+    padding: 0.55rem 0.95rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    animation: chipIn 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.1) backwards;
+  }
+
+  .chat-chip:nth-child(2) { animation-delay: 0.05s; }
+  .chat-chip:nth-child(3) { animation-delay: 0.1s; }
+  .chat-chip:nth-child(4) { animation-delay: 0.15s; }
+  .chat-chip:nth-child(5) { animation-delay: 0.2s; }
+
+  @keyframes chipIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .chat-chip:hover {
+    background: var(--cyan);
+    color: var(--dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px var(--cyan-glow);
+  }
+
+  .chat-chip.primary {
+    background: var(--cyan);
+    color: var(--dark);
+    font-weight: 600;
+  }
+
+  .chat-chip.primary:hover { background: #fff; }
+
+  .chat-footer {
+    padding: 0.8rem 1.2rem;
+    background: var(--dark-soft);
+    border-top: 1px solid var(--line-light-on-dark);
+  }
+
+  .chat-call-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.4rem;
+    border-radius: 4px;
+    transition: color 0.2s;
+  }
+
+  .chat-call-link:hover { color: var(--cyan); }
+  .chat-call-link svg { color: var(--cyan); }
 
   /* ===== SECTION SHARED ===== */
   .section { padding: 8rem 3rem; position: relative; }
@@ -1064,138 +1601,205 @@
   /* ===== CONTACT (dark) ===== */
   .contact-section { padding: 8rem 3rem; background: var(--dark); }
 
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    max-width: 1300px;
-    margin: 0 auto;
+  .contact-inner { max-width: 900px; margin: 0 auto; }
+
+  .contact-center {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  .contact-left h2 {
+  .contact-center .section-tag { justify-content: center; }
+  .contact-center .section-tag::after {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--cyan);
+  }
+
+  .contact-center h2 {
     font-size: clamp(2.5rem, 5.5vw, 4.5rem);
     line-height: 1;
     color: #fff;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
     font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
   }
 
-  .contact-left h2 .italic { color: var(--cyan); }
+  .contact-center h2 .italic { color: var(--cyan); }
 
-  .contact-left > p {
+  .contact-lede {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 300;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     color: var(--ink-soft);
-    max-width: 460px;
-    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-bottom: 3.5rem;
     line-height: 1.6;
   }
 
-  .contact-info-list { display: flex; flex-direction: column; gap: 1.8rem; }
-
-  .contact-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.4rem;
-    padding: 1.2rem 0;
-    border-bottom: 1px solid var(--line-light-on-dark);
+  .contact-lede strong {
+    font-weight: 500;
+    color: #fff;
+    font-style: normal;
   }
 
-  .contact-row .icon {
-    width: 44px; height: 44px;
+  .inline-code {
+    background: var(--cyan);
+    color: var(--dark);
+    padding: 0.12rem 0.55rem;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    font-style: normal;
+    display: inline-block;
+    margin-left: 0.3rem;
+  }
+
+  /* === Big Call/Text CTA buttons === */
+  .contact-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 720px;
+    margin-bottom: 3rem;
+  }
+
+  .contact-big-btn {
+    display: flex;
+    align-items: center;
+    gap: 1.3rem;
+    padding: 1.8rem 2rem;
+    border-radius: 12px;
+    text-decoration: none;
+    border: 1px solid var(--line-cyan);
+    background: var(--dark-card);
+    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+  }
+
+  .contact-big-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(74, 214, 232, 0.15) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+
+  .contact-big-btn:hover {
+    transform: translateY(-4px);
+    border-color: var(--cyan);
+    box-shadow: 0 20px 40px rgba(74, 214, 232, 0.2);
+  }
+
+  .contact-big-btn:hover::before { opacity: 1; }
+
+  .contact-big-btn.call {
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--cyan-deep) 100%);
+    border-color: var(--cyan);
+  }
+
+  .contact-big-btn.call .contact-big-icon { background: rgba(0, 0, 0, 0.2); color: #fff; }
+  .contact-big-btn.call .contact-big-label { color: rgba(0, 0, 0, 0.7); }
+  .contact-big-btn.call .contact-big-number { color: #000; }
+  .contact-big-btn.call .contact-big-sub { color: rgba(0, 0, 0, 0.65); }
+
+  .contact-big-icon {
+    width: 60px; height: 60px;
     border-radius: 50%;
+    background: var(--dark);
     border: 1px solid var(--cyan);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--cyan);
     flex-shrink: 0;
+    position: relative;
+    z-index: 1;
   }
 
-  .contact-row .lbl {
-    color: var(--ink-mute);
-    font-size: 0.68rem;
-    letter-spacing: 0.28em;
+  .contact-big-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-big-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    font-weight: 500;
+    color: var(--cyan);
+    font-weight: 600;
     margin-bottom: 0.3rem;
   }
 
-  .contact-row .val {
+  .contact-big-number {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
+    font-size: 1.55rem;
     color: #fff;
-    text-decoration: none;
-  }
-
-  .contact-row a.val:hover { color: var(--cyan); }
-
-  .quote-form {
-    background: var(--dark-card);
-    border: 1px solid var(--line-light-on-dark);
-    border-top: 2px solid var(--cyan);
-    padding: 2.8rem;
-    border-radius: 8px;
-  }
-
-  .quote-form h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
-    font-weight: 400;
-    color: #fff;
-    margin-bottom: 0.5rem;
-  }
-
-  .quote-form > p {
-    color: var(--ink-mute);
-    font-size: 0.9rem;
-    margin-bottom: 2rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-  }
-
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
-
-  .field { display: flex; flex-direction: column; margin-bottom: 1rem; }
-
-  .field label {
-    font-size: 0.66rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
     font-weight: 500;
-    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    margin-bottom: 0.35rem;
   }
 
-  .field input, .field select, .field textarea {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid var(--line-light-on-dark);
-    padding: 0.6rem 0;
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    transition: border-color 0.3s;
+  .contact-big-sub {
+    color: var(--ink-mute);
+    font-size: 0.82rem;
   }
 
-  .field input::placeholder, .field textarea::placeholder { color: var(--ink-mute); }
-
-  .field input:focus, .field select:focus, .field textarea:focus {
-    outline: none;
-    border-bottom-color: var(--cyan);
+  /* Animated phone ring on the call button */
+  .contact-big-btn.call .contact-big-icon svg {
+    animation: phoneRing 3s ease-in-out infinite;
+    transform-origin: center;
   }
 
-  .field select option { background: var(--dark-card); color: #fff; }
-  .field textarea { resize: vertical; min-height: 80px; }
+  @keyframes phoneRing {
+    0%, 85%, 100% { transform: rotate(0deg); }
+    87% { transform: rotate(-15deg); }
+    89% { transform: rotate(15deg); }
+    91% { transform: rotate(-12deg); }
+    93% { transform: rotate(12deg); }
+    95% { transform: rotate(-8deg); }
+    97% { transform: rotate(0deg); }
+  }
 
-  .quote-form button {
-    width: 100%;
-    margin-top: 1rem;
+  /* === Secondary meta links === */
+  .contact-meta {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
     justify-content: center;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--line-light-on-dark);
+    width: 100%;
+    max-width: 720px;
   }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+  }
+
+  .meta-item svg { color: var(--cyan); flex-shrink: 0; }
+
+  .meta-item a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .meta-item a:hover { color: var(--cyan); }
 
   /* ===== FOOTER ===== */
   footer {
@@ -1269,10 +1873,16 @@
     .insta-phone { order: -1; }
     .area-grid { grid-template-columns: 1fr; }
     .testimonials-grid { grid-template-columns: 1fr; }
-    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-actions { grid-template-columns: 1fr; }
+    .contact-meta { gap: 1.2rem; flex-direction: column; align-items: center; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
     .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
-    .floating-contact .label { display: none; }
+    .floating-contact .call-number-label { display: none; }
+    .chat-teaser { right: 5rem; max-width: 240px; font-size: 0.85rem; }
+    .chat-panel { right: 1rem; width: calc(100vw - 2rem); bottom: 7rem; }
+    .promo-inner { padding: 0.55rem 2.2rem 0.55rem 1rem; font-size: 0.78rem; }
+    .promo-text { gap: 0.3rem; }
+    .promo-phone { padding: 0.15rem 0.55rem; font-size: 0.78rem; }
     .philosophy { padding: 6rem 1.3rem; }
   }
 
@@ -1280,10 +1890,11 @@
     .hero { padding-top: 6rem; }
     .process-grid { grid-template-columns: 1fr; }
     .area-cities { grid-template-columns: 1fr; }
-    .form-row { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; }
     .phone-frame { width: 260px; height: 480px; }
-    .quote-form { padding: 2rem; }
+    .contact-big-btn { padding: 1.4rem 1.4rem; gap: 1rem; }
+    .contact-big-icon { width: 50px; height: 50px; }
+    .contact-big-number { font-size: 1.3rem; }
   }
 </style>
 </head>
@@ -1315,31 +1926,102 @@
 </nav>
 
 <!-- ===== FLOATING CONTACT ===== -->
-<div class="floating-contact">
-  <a href="#contact" class="float-btn">
-    <span class="label">💬 Need help? Chat now!</span>
-    <div class="float-icon-wrap">
-      <div class="float-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      </div>
-      <span class="float-badge">1</span>
+<!-- ===== TOP PROMO BAR (25% OFF) ===== -->
+<div class="promo-bar" id="promoBar">
+  <div class="promo-inner">
+    <span class="promo-spark">✦</span>
+    <span class="promo-text">
+      <strong>25% OFF</strong> your first service —
+      <em>new customers only.</em>
+      Mention code <code>FIRST25</code> when you call
+      <a href="tel:4104744838" class="promo-phone">📞 (410) 474-4838</a>
+    </span>
+    <button class="promo-close" onclick="document.getElementById('promoBar').style.display='none'">×</button>
+  </div>
+</div>
+
+<!-- ===== CHAT WIDGET (floating) ===== -->
+<div class="chat-system">
+  <!-- Teaser bubble that pops above the chat icon -->
+  <div class="chat-teaser" id="chatTeaser">
+    <button class="teaser-close" onclick="dismissTeaser(event)">×</button>
+    <div class="teaser-avatar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M12 22V13" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M12 13C12 13 8 9 4 9C4 9 5 12 8 13" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 13C12 13 16 9 20 9C20 9 19 12 16 13" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </div>
-  </a>
-  <a href="tel:4104744838" class="float-btn">
-    <span class="label">📞 Call now — we answer fast!</span>
-    <div class="float-icon-wrap">
-      <div class="float-icon">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      </div>
+    <div class="teaser-text" id="teaserText">
+      👋 Hey! Want to claim your <strong>25% off</strong>?
     </div>
-  </a>
+    <div class="teaser-arrow"></div>
+  </div>
+
+  <!-- Full chat panel -->
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-header-avatar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M12 22V13" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M12 13C12 13 8 9 4 9C4 9 5 12 8 13C5 12 5 16 8 17" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 13C12 13 16 9 20 9C20 9 19 12 16 13C19 12 19 16 16 17" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 13C12 13 10 7 6 5C6 5 8 9 10 9" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 13C12 13 14 7 18 5C18 5 16 9 14 9" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="online-dot"></span>
+      </div>
+      <div class="chat-header-text">
+        <div class="chat-name">Blue Palms Assistant</div>
+        <div class="chat-status"><span class="live-dot"></span> Online · Replies instantly</div>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">×</button>
+    </div>
+
+    <div class="chat-body" id="chatBody">
+      <!-- Messages injected here by JS -->
+    </div>
+
+    <div class="chat-quick-actions" id="quickActions">
+      <!-- Quick reply buttons injected by JS -->
+    </div>
+
+    <div class="chat-footer">
+      <a href="tel:4104744838" class="chat-call-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        Prefer to talk? Call (410) 474-4838
+      </a>
+    </div>
+  </div>
+
+  <!-- Floating launcher buttons -->
+  <div class="floating-contact">
+    <button class="float-btn float-chat" onclick="toggleChat()" aria-label="Open chat">
+      <div class="float-icon-wrap">
+        <div class="float-icon float-icon-chat">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <span class="float-badge" id="chatBadge">1</span>
+      </div>
+    </button>
+    <a href="tel:4104744838" class="float-btn float-call" aria-label="Call now">
+      <span class="call-number-label">(410) 474-4838</span>
+      <div class="float-icon-wrap">
+        <div class="float-icon float-icon-call">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+      </div>
+    </a>
+  </div>
 </div>
 
 <!-- ===== HERO ===== -->
 <section class="hero">
   <div class="hero-video-wrapper">
     <video class="hero-video" autoplay muted loop playsinline preload="auto">
-      <source src="https://res.cloudinary.com/dycutbccb/video/upload/v1778019039/SnapInsta.to_AQNsqWp048_y5Agka6YdM1ARWfriYEZueEQhGhwMFNigmg-bj326cKu5l7yCE4_kuNbVEfxVR53yOdkFXF2LROP1I-4YCqUdY3b5cv4_e0jomv.mp4" type="video/mp4">
+      <source src="https://res.cloudinary.com/dycutbccb/video/upload/v1778450323/SnapInsta.to_AQN9gaUHYQuyS6sF_sTfobXgtstErX5cNsGYB6Xug0e1RVLoP04RKMP2bNLNeV4M9VxzQP0anSdhVGqZR6SUKU0HFkB6bTrykplLZes_onoi5j.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
   </div>
@@ -1520,7 +2202,7 @@
         <div class="city-tag">Montgomery</div>
       </div>
 
-      <a href="#contact" class="area-check-btn">Check Your Area</a>
+      <a href="tel:4104744838" class="area-check-btn">Call to Check Your Area</a>
     </div>
 
     <div class="map-frame">
@@ -1570,80 +2252,50 @@
 
 <!-- ===== CONTACT (dark) ===== -->
 <section class="contact-section" id="contact">
-  <div class="contact-grid">
-    <div class="contact-left">
+  <div class="contact-inner">
+    <div class="contact-center">
       <span class="section-tag">Get In Touch</span>
       <h2 class="display" style="margin-top: 1.5rem;">Let's transform your <span class="italic">outdoor space.</span></h2>
-      <p>Tell us a little about your property and what you're hoping to fix, refresh, or rebuild. We'll follow up within a business day.</p>
+      <p class="contact-lede">Skip the forms. Just <strong>call or text</strong> — we answer fast, and your <strong style="color: var(--cyan);">25% off</strong> first-service discount is automatic with code <code class="inline-code">FIRST25</code>.</p>
 
-      <div class="contact-info-list">
-        <div class="contact-row">
-          <div class="icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <div class="contact-actions">
+        <a href="tel:4104744838" class="contact-big-btn call">
+          <div class="contact-big-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </div>
-          <div>
-            <div class="lbl">Phone</div>
-            <a href="tel:4104744838" class="val">(410) 474-4838</a>
+          <div class="contact-big-text">
+            <div class="contact-big-label">CALL NOW</div>
+            <div class="contact-big-number">(410) 474-4838</div>
+            <div class="contact-big-sub">Fastest reply · Tap to dial</div>
           </div>
-        </div>
-        <div class="contact-row">
-          <div class="icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div>
-            <div class="lbl">Email</div>
-            <a href="mailto:hello@bluepalmslandscape.com" class="val">hello@bluepalmslandscape.com</a>
-          </div>
-        </div>
-        <div class="contact-row">
-          <div class="icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </div>
-          <div>
-            <div class="lbl">Instagram</div>
-            <a href="https://instagram.com/bluepalmslandscape_" class="val">@bluepalmslandscape_</a>
-          </div>
-        </div>
-        <div class="contact-row">
-          <div class="icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div>
-            <div class="lbl">Service Area</div>
-            <span class="val">Maryland Area</span>
-          </div>
-        </div>
-      </div>
-    </div>
+        </a>
 
-    <div class="quote-form">
-      <h3>Request a free quote</h3>
-      <p>No pressure, no obligation. Just an honest conversation.</p>
-      <div class="form-row">
-        <div class="field"><label>First name</label><input type="text" placeholder="Jane" /></div>
-        <div class="field"><label>Last name</label><input type="text" placeholder="Doe" /></div>
+        <a href="sms:4104744838" class="contact-big-btn text">
+          <div class="contact-big-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="contact-big-text">
+            <div class="contact-big-label">TEXT US</div>
+            <div class="contact-big-number">(410) 474-4838</div>
+            <div class="contact-big-sub">Send a quick message anytime</div>
+          </div>
+        </a>
       </div>
-      <div class="form-row">
-        <div class="field"><label>Phone</label><input type="tel" placeholder="410.000.0000" /></div>
-        <div class="field"><label>Email</label><input type="email" placeholder="you@email.com" /></div>
+
+      <div class="contact-meta">
+        <div class="meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:hello@bluepalmslandscape.com">hello@bluepalmslandscape.com</a>
+        </div>
+        <div class="meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          <a href="https://instagram.com/bluepalmslandscape_">@bluepalmslandscape_</a>
+        </div>
+        <div class="meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Serving the Maryland Area</span>
+        </div>
       </div>
-      <div class="field">
-        <label>Service of interest</label>
-        <select>
-          <option>Landscape Design</option>
-          <option>Grass Cutting</option>
-          <option>Mulching</option>
-          <option>Soft &amp; Power Washing</option>
-          <option>Gutter Cleaning</option>
-          <option>Weed Removal</option>
-          <option>Multiple / Not sure</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Tell us about your property</label>
-        <textarea placeholder="A few details about what you're hoping for..."></textarea>
-      </div>
-      <button class="btn-cta" onclick="event.preventDefault(); this.textContent='✓ We\'ll be in touch'; this.style.background='var(--cyan-deep)'; this.style.color='#fff';">Send Request →</button>
     </div>
   </div>
 </section>
@@ -1685,7 +2337,8 @@
         <li><a href="#philosophy">Philosophy</a></li>
         <li><a href="#work">Our Work</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="#contact">Free Quote</a></li>
+        <li><a href="tel:4104744838">Call Us</a></li>
+        <li><a href="sms:4104744838">Text Us</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -1705,6 +2358,7 @@
 </footer>
 
 <script>
+  // === Lazy-pause off-screen videos ===
   if ('IntersectionObserver' in window) {
     const videos = document.querySelectorAll('.work-tile video, .phone-screen video');
     const obs = new IntersectionObserver((entries) => {
@@ -1715,6 +2369,252 @@
       });
     }, { threshold: 0.15 });
     videos.forEach(v => obs.observe(v));
+  }
+
+  // === Promo bar push-down ===
+  if (document.getElementById('promoBar')) {
+    document.body.classList.add('has-promo');
+  }
+
+  // === Seasonal logic ===
+  function getSeason() {
+    const month = new Date().getMonth(); // 0-11
+    if (month >= 2 && month <= 4) return 'spring';
+    if (month >= 5 && month <= 7) return 'summer';
+    if (month >= 8 && month <= 10) return 'fall';
+    return 'winter';
+  }
+
+  const SEASON = getSeason();
+  const SEASON_DATA = {
+    spring: {
+      emoji: '🌱',
+      label: 'Spring',
+      pitch: "Spring is prime time for a fresh start. Here's what's hot right now:",
+      services: [
+        { name: 'Spring Cleanup', why: 'Clear winter debris, prep beds.', tag: '🔥 Most booked' },
+        { name: 'Fresh Mulching', why: 'Lock in moisture, beat the weeds.', tag: '✨ Popular' },
+        { name: 'Soft Washing', why: 'Wash off winter grime from siding.', tag: '💧 Seasonal' },
+        { name: 'Lawn Reseed &amp; Mow', why: 'Get that emerald lawn going.', tag: '🌿 Now' }
+      ]
+    },
+    summer: {
+      emoji: '☀️',
+      label: 'Summer',
+      pitch: "Summer means peak growth. Here's what most folks book in your area:",
+      services: [
+        { name: 'Weekly Grass Cutting', why: 'Crisp lines, every visit.', tag: '🔥 Most booked' },
+        { name: 'Power Washing', why: 'Driveway &amp; patio refresh before BBQ season.', tag: '✨ Popular' },
+        { name: 'Weed Removal', why: 'Stay ahead before they take over.', tag: '⚡ Time-sensitive' },
+        { name: 'Bed Maintenance', why: 'Keep landscaping looking sharp.', tag: '🌿 Now' }
+      ]
+    },
+    fall: {
+      emoji: '🍂',
+      label: 'Fall',
+      pitch: "Fall prep saves you headaches all winter. Top picks right now:",
+      services: [
+        { name: 'Gutter Cleaning', why: 'Get ahead of leaf clogs.', tag: '🔥 Most booked' },
+        { name: 'Fall Cleanup', why: 'Leaves, branches, beds — all reset.', tag: '✨ Popular' },
+        { name: 'Final Mow &amp; Edge', why: 'Last clean cut before frost.', tag: '⏰ Limited window' },
+        { name: 'Soft Washing', why: 'Cleanup before holiday guests.', tag: '🌿 Now' }
+      ]
+    },
+    winter: {
+      emoji: '❄️',
+      label: 'Winter',
+      pitch: "Winter's the smart time to plan ahead. Here's what's available:",
+      services: [
+        { name: 'Landscape Design', why: 'Plan the spring rebuild now.', tag: '🔥 Most booked' },
+        { name: 'Gutter Cleaning', why: 'Catch the last leaves before snow.', tag: '✨ Popular' },
+        { name: 'Soft Washing', why: 'Mild-weather days = perfect timing.', tag: '💧 Available' },
+        { name: 'Spring Booking', why: 'Lock in your slot before March rush.', tag: '🎯 Early-bird' }
+      ]
+    }
+  };
+
+  // === Chat widget ===
+  const chatPanel = document.getElementById('chatPanel');
+  const chatBody = document.getElementById('chatBody');
+  const quickActions = document.getElementById('quickActions');
+  const chatBadge = document.getElementById('chatBadge');
+  const chatTeaser = document.getElementById('chatTeaser');
+  const teaserText = document.getElementById('teaserText');
+
+  let chatStarted = false;
+  let teaserDismissed = false;
+
+  const TEASER_MESSAGES = [
+    '👋 Hey! Want to claim your <strong>25% off</strong>?',
+    '🍃 Free quote in under 60 seconds — interested?',
+    '📞 We answer fast — try us!',
+    '✨ Curious what we can do for your yard?'
+  ];
+
+  let teaserIdx = 0;
+
+  function showTeaser() {
+    if (teaserDismissed || !chatTeaser) return;
+    chatTeaser.classList.add('show');
+  }
+
+  function rotateTeaser() {
+    if (teaserDismissed || !teaserText) return;
+    teaserIdx = (teaserIdx + 1) % TEASER_MESSAGES.length;
+    teaserText.style.opacity = '0';
+    setTimeout(() => {
+      teaserText.innerHTML = TEASER_MESSAGES[teaserIdx];
+      teaserText.style.opacity = '1';
+    }, 300);
+  }
+
+  function dismissTeaser(e) {
+    if (e) e.stopPropagation();
+    teaserDismissed = true;
+    if (chatTeaser) chatTeaser.classList.remove('show');
+  }
+
+  // Show teaser after 3.5s, rotate every 7s
+  setTimeout(showTeaser, 3500);
+  setInterval(rotateTeaser, 7000);
+
+  // Click teaser to open chat
+  if (chatTeaser) {
+    chatTeaser.addEventListener('click', (e) => {
+      if (e.target.classList.contains('teaser-close')) return;
+      toggleChat();
+    });
+  }
+
+  function toggleChat() {
+    if (!chatPanel) return;
+    const isOpen = chatPanel.classList.toggle('open');
+    if (isOpen) {
+      dismissTeaser();
+      if (chatBadge) chatBadge.style.display = 'none';
+      if (!chatStarted) {
+        chatStarted = true;
+        startConversation();
+      }
+    }
+  }
+
+  function addMsg(text, type = 'bot', delay = 0) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const m = document.createElement('div');
+        m.className = 'msg ' + type;
+        m.innerHTML = text;
+        chatBody.appendChild(m);
+        chatBody.scrollTop = chatBody.scrollHeight;
+        resolve();
+      }, delay);
+    });
+  }
+
+  function addTyping(duration = 900) {
+    return new Promise(resolve => {
+      const t = document.createElement('div');
+      t.className = 'msg bot typing';
+      t.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+      chatBody.appendChild(t);
+      chatBody.scrollTop = chatBody.scrollHeight;
+      setTimeout(() => {
+        t.remove();
+        resolve();
+      }, duration);
+    });
+  }
+
+  function setChips(chips) {
+    quickActions.innerHTML = '';
+    chips.forEach(c => {
+      const b = document.createElement('button');
+      b.className = 'chat-chip' + (c.primary ? ' primary' : '');
+      b.innerHTML = c.label;
+      b.onclick = () => c.onClick();
+      quickActions.appendChild(b);
+    });
+  }
+
+  async function startConversation() {
+    const s = SEASON_DATA[SEASON];
+    await addTyping(700);
+    await addMsg(`👋 Hi! I'm the Blue Palms assistant. How can I help today?`);
+    await addTyping(800);
+    await addMsg(`<span class="promo-badge">25% OFF</span> First-time customer? You get 25% off your first service. Just mention code <strong>FIRST25</strong>.`, 'promo');
+    showQuickMenu();
+  }
+
+  function showQuickMenu() {
+    setChips([
+      { label: `${SEASON_DATA[SEASON].emoji} What should I book this ${SEASON_DATA[SEASON].label}?`, primary: true, onClick: recommendSeasonal },
+      { label: '📞 Call now', onClick: () => window.location.href = 'tel:4104744838' },
+      { label: '💬 Text us', onClick: () => window.location.href = 'sms:4104744838' },
+      { label: '📋 See all services', onClick: showAllServices },
+      { label: '📍 Do you serve my area?', onClick: askArea }
+    ]);
+  }
+
+  async function recommendSeasonal() {
+    const s = SEASON_DATA[SEASON];
+    await addMsg(`Show me what's hot this ${s.label.toLowerCase()}`, 'user');
+    await addTyping(900);
+    await addMsg(`${s.emoji} <strong>${s.label} picks for ${new Date().toLocaleString('en-US', { month: 'long' })}:</strong><br>${s.pitch}`);
+    for (let i = 0; i < s.services.length; i++) {
+      const svc = s.services[i];
+      await addMsg(`<strong>${svc.name}</strong> <span style="color:var(--cyan);font-size:0.75rem;">${svc.tag}</span><br><span style="color:var(--ink-mute);font-size:0.85rem;">${svc.why}</span>`, 'bot', 350);
+    }
+    await addTyping(700);
+    await addMsg(`Want to lock in your <strong>25% off</strong> on one of these? Easiest is to call or text us. 👇`);
+    setChips([
+      { label: '📞 Call (410) 474-4838', primary: true, onClick: () => window.location.href = 'tel:4104744838' },
+      { label: '💬 Text us', onClick: () => window.location.href = 'sms:4104744838' },
+      { label: '↩ Back to menu', onClick: showQuickMenu }
+    ]);
+  }
+
+  async function askQuote() {
+    await addMsg('I want a free quote', 'user');
+    await addTyping(800);
+    await addMsg(`Easy! Quickest way is to <strong>call or text</strong> — we answer fast and your <strong>25% off</strong> with code <strong>FIRST25</strong> applies automatically. 👇`);
+    setChips([
+      { label: '📞 Call (410) 474-4838', primary: true, onClick: () => window.location.href = 'tel:4104744838' },
+      { label: '💬 Text us', onClick: () => window.location.href = 'sms:4104744838' },
+      { label: '↩ Back', onClick: showQuickMenu }
+    ]);
+  }
+
+  async function showAllServices() {
+    await addMsg('Show me all services', 'user');
+    await addTyping(700);
+    const all = [
+      '🏡 <strong>Landscape Design</strong> — full property planning',
+      '🌿 <strong>Grass Cutting</strong> — weekly &amp; bi-weekly',
+      '🍂 <strong>Mulching</strong> — beds installed clean',
+      '💧 <strong>Soft &amp; Power Washing</strong> — homes, driveways, fences',
+      '🪣 <strong>Gutter Cleaning</strong> — hand-cleared + flow test',
+      '🌱 <strong>Weed Removal</strong> — targeted treatment',
+      '🍃 <strong>Seasonal Cleanups</strong> — spring &amp; fall resets'
+    ];
+    await addMsg(all.join('<br>'));
+    await addMsg(`Which one are you curious about?`);
+    setChips([
+      { label: `${SEASON_DATA[SEASON].emoji} Best for this season`, primary: true, onClick: recommendSeasonal },
+      { label: '📞 Call to book', onClick: () => window.location.href = 'tel:4104744838' },
+      { label: '↩ Back', onClick: showQuickMenu }
+    ]);
+  }
+
+  async function askArea() {
+    await addMsg('Do you serve my area?', 'user');
+    await addTyping(700);
+    await addMsg(`We serve the Maryland area — Baltimore, Howard County, Anne Arundel, Carroll, Harford, and Montgomery. If you're nearby, we're available. Want to confirm by phone?`);
+    setChips([
+      { label: '📞 Call to confirm', primary: true, onClick: () => window.location.href = 'tel:4104744838' },
+      { label: '💬 Text us', onClick: () => window.location.href = 'sms:4104744838' },
+      { label: '↩ Back', onClick: showQuickMenu }
+    ]);
   }
 </script>
 
