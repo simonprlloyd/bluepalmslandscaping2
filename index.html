@@ -2657,8 +2657,8 @@
       <span class="m-arrow">→</span>
     </a>
     <a href="#seasonal" class="mobile-menu-link" onclick="toggleMobileMenu()">
-      <span class="m-icon" id="mobileSeasonIcon">🌱</span>
-      <div><div class="m-title">By Season</div><div class="m-sub">What to book right now</div></div>
+      <span class="m-icon">🍃</span>
+      <div><div class="m-title">By Season</div><div class="m-sub">Recommendations all year</div></div>
       <span class="m-arrow">→</span>
     </a>
     <a href="#reviews" class="mobile-menu-link" onclick="toggleMobileMenu()">
@@ -2892,6 +2892,13 @@
             <div>
               <div class="name">Weed Removal</div>
               <div class="desc">Beds, walkways, patios — kept clean.</div>
+            </div>
+          </li>
+          <li>
+            <span class="num">07</span>
+            <div>
+              <div class="name">Snow Removal</div>
+              <div class="desc">Driveways &amp; walkways cleared after every storm.</div>
             </div>
           </li>
         </ul>
@@ -3148,6 +3155,7 @@
         <li><a href="#work">Mulching</a></li>
         <li><a href="#work">Soft Washing</a></li>
         <li><a href="#work">Gutter Cleaning</a></li>
+        <li><a href="#work">Snow Removal</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -3273,11 +3281,11 @@
       label: 'Winter',
       months: 'Dec – Feb',
       headline: 'winter plan.',
-      pitch: "Winter is the smart time to plan ahead. The crew has more availability, design takes thought, and locking in a spring slot early avoids the March rush.",
+      pitch: "Winter is the smart time to plan ahead. Snow's coming, the crew has more availability, and locking in a spring slot early avoids the March rush.",
       services: [
+        { name: 'Snow Removal', why: 'Driveways &amp; walkways cleared fast.', tag: '❄️ Storm-ready' },
         { name: 'Landscape Design', why: 'Plan the spring rebuild now.', tag: '🔥 Most booked' },
         { name: 'Gutter Cleaning', why: 'Last leaves before snow.', tag: '✨ Popular' },
-        { name: 'Soft Washing', why: 'Mild days = perfect timing.', tag: '💧 Available' },
         { name: 'Early Spring Booking', why: 'Lock your slot before March rush.', tag: '🎯 Early-bird' }
       ]
     }
@@ -3288,26 +3296,15 @@
     const grid = document.getElementById('seasonalGrid');
     if (!grid) return;
 
-    // Sync mobile menu icon with current season
-    const mobileIcon = document.getElementById('mobileSeasonIcon');
-    if (mobileIcon) mobileIcon.textContent = SEASON_DATA[SEASON].emoji;
+    // Show seasons in fixed order — never changes
+    const ordered = ['spring', 'summer', 'fall', 'winter'];
 
-    // Build cards in order, starting from current season
-    const order = ['spring', 'summer', 'fall', 'winter'];
-    const startIdx = order.indexOf(SEASON);
-    const ordered = [...order.slice(startIdx), ...order.slice(0, startIdx)];
-
-    grid.innerHTML = ordered.map((key, i) => {
+    grid.innerHTML = ordered.map((key) => {
       const s = SEASON_DATA[key];
-      const isNow = key === SEASON;
-      const tag = isNow
-        ? '<span class="season-card-tag">● Now</span>'
-        : `<span class="season-card-tag">${i === 1 ? 'Up Next' : 'Later'}</span>`;
       return `
-        <div class="season-card ${isNow ? 'now' : ''}">
+        <div class="season-card">
           <div class="season-card-header">
             <div class="season-card-icon">${s.emoji}</div>
-            ${tag}
           </div>
           <div class="season-card-title">${s.label}</div>
           <div class="season-card-months">${s.months}</div>
@@ -3315,7 +3312,7 @@
             ${s.services.slice(0, 3).map(svc => `<li>${svc.name}</li>`).join('')}
           </ul>
           <div class="season-card-cta">
-            <a href="${isNow ? 'tel:4104744838' : '#seasonal'}">${isNow ? 'Call to Book →' : 'Plan Ahead →'}</a>
+            <a href="tel:4104744838">Call to Book →</a>
           </div>
         </div>
       `;
@@ -3485,6 +3482,7 @@
       '💧 <strong>Soft &amp; Power Washing</strong> — homes, driveways, fences',
       '🪣 <strong>Gutter Cleaning</strong> — hand-cleared + flow test',
       '🌱 <strong>Weed Removal</strong> — targeted treatment',
+      '❄️ <strong>Snow Removal</strong> — driveways &amp; walkways cleared fast',
       '🍃 <strong>Seasonal Cleanups</strong> — spring &amp; fall resets'
     ];
     await addMsg(all.join('<br>'));
