@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Blue Palms LLC — Premium Outdoor Care | Maryland</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #0b1116;
+    --dark-soft: #111a20;
+    --dark-card: #161f26;
+    --cream: #f5f1e8;
+    --cream-soft: #efeadd;
+    --ink: #ffffff;
+    --ink-soft: #c4ccd0;
+    --ink-mute: #8a9499;
+    --ink-dark: #0b1116;
+    --ink-dark-soft: #4a5359;
+    --cyan: #4ad6e8;
+    --cyan-deep: #1ba9bd;
+    --cyan-glow: rgba(74, 214, 232, 0.4);
+    --pink: #ff6b8b;
+    --line-cyan: rgba(74, 214, 232, 0.25);
+    --line-dark-on-light: rgba(11, 17, 22, 0.1);
+    --line-light-on-dark: rgba(255, 255, 255, 0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .display {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+  }
+
+  .italic {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--cyan);
+    font-weight: 400;
+  }
+
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--cyan);
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .section-tag::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--cyan);
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.4rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(11, 17, 22, 0.9);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line-light-on-dark);
+  }
+
+  .logo { display: flex; align-items: center; gap: 0.9rem; color: var(--ink); text-decoration: none; }
+
+  .logo-mark {
+    width: 44px; height: 44px;
+    border-radius: 8px;
+    background: #000;
+    border: 1px solid var(--line-light-on-dark);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.22em;
+    font-weight: 500;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .logo-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    font-weight: 400;
+    margin-top: 0.35rem;
+  }
+
+  .nav-links {
+    display: flex; gap: 2.6rem;
+    list-style: none; align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--cyan); }
+
+  .nav-phone {
+    padding: 0.85rem 1.6rem;
+    border: 1px solid var(--cyan);
+    border-radius: 4px;
+    color: var(--cyan) !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 500 !important;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .nav-phone:hover {
+    background: var(--cyan);
+    color: var(--dark) !important;
+    box-shadow: 0 0 24px var(--cyan-glow);
+  }
+
+  /* ===== HERO with VIDEO ===== */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 7rem 3rem 4rem;
+    overflow: hidden;
+    background: var(--dark);
+  }
+
+  .hero-video-wrapper { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+
+  .hero-video {
+    position: absolute; top: 50%; left: 50%;
+    min-width: 100%; min-height: 100%;
+    width: auto; height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    filter: brightness(0.85) saturate(1.1);
+  }
+
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(11, 17, 22, 0.4) 0%, transparent 30%, rgba(11, 17, 22, 0.85) 100%),
+      linear-gradient(90deg, rgba(11, 17, 22, 0.7) 0%, transparent 50%);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1300px; margin: 0 auto; width: 100%;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    line-height: 0.92;
+    margin-bottom: 2.5rem;
+    color: #fff;
+    max-width: 1100px;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
+
+  .hero h1 .italic {
+    color: var(--cyan);
+    font-weight: 300;
+  }
+
+  .hero p.lede {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.1rem, 1.4vw, 1.4rem);
+    color: var(--ink-soft);
+    max-width: 540px;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeUp 1s 0.6s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 1s 0.8s forwards;
+  }
+
+  .btn-cta {
+    background: var(--cyan);
+    color: var(--dark);
+    padding: 1.2rem 2.2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: all 0.4s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-cta:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px var(--cyan-glow);
+  }
+
+  .btn-ghost {
+    color: var(--ink);
+    text-decoration: none;
+    padding: 1.2rem 2.2rem;
+    border: 1px solid var(--line-light-on-dark);
+    border-radius: 4px;
+    font-size: 0.82rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+
+  .btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  /* Scroll dot indicator (like the reference) */
+  .scroll-dot {
+    position: absolute;
+    bottom: 3rem; left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    color: var(--ink);
+    font-size: 0.65rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .scroll-dot::before {
+    content: '';
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 1px solid var(--cyan);
+    position: relative;
+  }
+
+  .scroll-dot::after {
+    content: '';
+    position: absolute;
+    top: 8px; left: 50%;
+    transform: translateX(-50%);
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--pink);
+    animation: pulseDot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+    50% { opacity: 0.4; transform: translateX(-50%) scale(1.3); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== FLOATING CONTACT BUBBLES ===== */
+  .floating-contact {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .float-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .float-btn .label {
+    background: rgba(11, 17, 22, 0.95);
+    backdrop-filter: blur(10px);
+    color: var(--ink);
+    padding: 0.7rem 1.2rem;
+    border-radius: 999px;
+    border: 1px solid var(--cyan);
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    transition: all 0.3s;
+  }
+
+  .float-btn:hover .label { background: var(--cyan); color: var(--dark); }
+
+  .float-icon-wrap {
+    position: relative;
+    width: 56px; height: 56px;
+    flex-shrink: 0;
+  }
+
+  .float-icon-wrap::before, .float-icon-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid var(--cyan);
+    opacity: 0.4;
+  }
+
+  .float-icon-wrap::before {
+    transform: scale(1.3);
+    animation: ringPulse 2.5s ease-in-out infinite;
+  }
+
+  .float-icon-wrap::after {
+    transform: scale(1.6);
+    opacity: 0.2;
+    animation: ringPulse 2.5s 0.5s ease-in-out infinite;
+  }
+
+  @keyframes ringPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.1; }
+  }
+
+  .float-icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--cyan);
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px var(--cyan-glow);
+    position: relative;
+    z-index: 1;
+  }
+
+  .float-badge {
+    position: absolute;
+    top: -4px; right: -4px;
+    background: var(--pink);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 600;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  /* ===== SECTION SHARED ===== */
+  .section { padding: 8rem 3rem; position: relative; }
+  .section-inner { max-width: 1300px; margin: 0 auto; }
+
+  /* Cream sections */
+  .section.light {
+    background: var(--cream);
+    color: var(--ink-dark);
+  }
+
+  .section.light .section-tag { color: var(--cyan-deep); }
+  .section.light .section-tag::before { background: var(--cyan-deep); }
+
+  .section.light h2 { color: var(--ink-dark); }
+  .section.light h2 .italic { color: var(--cyan-deep); }
+  .section.light p { color: var(--ink-dark-soft); }
+
+  /* Dark sections */
+  .section.dark { background: var(--dark); }
+  .section.dark h2 { color: #fff; }
+  .section.dark p { color: var(--ink-soft); }
+
+  /* Section header pattern with center dot */
+  .header-block {
+    margin-bottom: 4rem;
+  }
+
+  .header-block .section-tag { margin-bottom: 1.8rem; }
+
+  .header-block h2 {
+    font-size: clamp(2.5rem, 5.5vw, 5rem);
+    line-height: 1;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    margin-bottom: 1.5rem;
+    max-width: 1100px;
+  }
+
+  .header-block .lede {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.15rem;
+    max-width: 580px;
+    line-height: 1.6;
+  }
+
+  /* Section dot orbit decorator */
+  .orbit-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--cyan-deep);
+    margin: 1.5rem 0 0;
+    position: relative;
+  }
+
+  .orbit-dot::after {
+    content: '';
+    width: 8px; height: 8px;
+    background: var(--pink);
+    border-radius: 50%;
+  }
+
+  .section.dark .orbit-dot { border-color: var(--cyan); }
+
+  /* ===== WORK / GALLERY (light) ===== */
+  .work-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.4fr;
+    gap: 1.2rem;
+    margin-top: 2rem;
+  }
+
+  .work-tile {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    aspect-ratio: 3/4;
+    background: var(--dark-card);
+    box-shadow: 0 12px 32px rgba(11, 17, 22, 0.12);
+  }
+
+  .work-tile video, .work-tile img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+  }
+
+  .work-tile:hover video, .work-tile:hover img { transform: scale(1.05); }
+
+  .service-menu {
+    background: var(--dark);
+    border-radius: 8px;
+    padding: 3rem 2.5rem;
+    aspect-ratio: 3/4;
+    overflow: auto;
+    border-top: 2px solid var(--cyan);
+    box-shadow: 0 12px 32px rgba(11, 17, 22, 0.18);
+  }
+
+  .service-menu .menu-tag {
+    color: var(--cyan);
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+  }
+
+  .service-menu h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+    color: #fff;
+    margin-bottom: 2rem;
+    line-height: 1.05;
+  }
+
+  .service-menu h3 .italic { color: var(--cyan); font-weight: 400; }
+
+  .service-list { list-style: none; }
+
+  .service-list li {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 1rem;
+    padding: 1.3rem 0;
+    border-bottom: 1px solid var(--line-light-on-dark);
+    transition: padding 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .service-list li:hover { padding-left: 0.5rem; }
+
+  .service-list li:last-child { border-bottom: none; }
+
+  .service-list .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--cyan);
+    font-size: 0.85rem;
+    padding-top: 0.2rem;
+  }
+
+  .service-list .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    color: #fff;
+    margin-bottom: 0.2rem;
+    font-weight: 400;
+  }
+
+  .service-list .desc {
+    color: var(--ink-mute);
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+
+  .service-list .marker {
+    position: absolute;
+    left: 16px;
+    top: 1.5rem;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 1px solid var(--cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-50%);
+    background: var(--dark);
+  }
+
+  .service-list .marker::after {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--cyan);
+  }
+
+  .service-list li:not(.active) .marker::after { background: transparent; }
+
+  /* ===== PROCESS (light) ===== */
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin-top: 3rem;
+  }
+
+  .process-step {
+    padding: 2rem 1.5rem 0;
+    border-top: 1px solid var(--line-dark-on-light);
+    position: relative;
+  }
+
+  .process-step::before {
+    content: '';
+    position: absolute;
+    top: -4px; left: 0;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--cyan-deep);
+  }
+
+  .process-step .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--cyan-deep);
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+    font-weight: 400;
+  }
+
+  .process-step .num::before {
+    content: '.';
+    margin-right: 0.1rem;
+  }
+
+  .process-step h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+    color: var(--ink-dark);
+  }
+
+  .process-step p {
+    color: var(--ink-dark-soft);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  /* ===== PHILOSOPHY (dark, big quote) ===== */
+  .philosophy {
+    padding: 10rem 3rem;
+    position: relative;
+  }
+
+  .philosophy-inner { max-width: 1300px; margin: 0 auto; position: relative; }
+
+  .quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 8rem;
+    color: var(--cyan);
+    line-height: 0.5;
+    margin-bottom: 2.5rem;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .philosophy blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 4.5vw, 4rem);
+    line-height: 1.15;
+    color: #fff;
+    max-width: 1100px;
+    margin-bottom: 4rem;
+  }
+
+  .philosophy blockquote .italic {
+    color: var(--cyan);
+    font-weight: 400;
+  }
+
+  .philosophy cite {
+    color: var(--ink-mute);
+    font-style: normal;
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .philosophy cite::before { content: '— '; color: var(--cyan); }
+
+  /* ===== INSTAGRAM (dark with phone mock) ===== */
+  .instagram {
+    padding: 8rem 3rem;
+    overflow: hidden;
+  }
+
+  .insta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    max-width: 1300px;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .insta-left h2 {
+    font-size: clamp(2.5rem, 5.5vw, 5rem);
+    line-height: 0.95;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    margin-bottom: 1.8rem;
+    color: #fff;
+  }
+
+  .insta-left p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+  }
+
+  .insta-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: var(--cyan-deep);
+    color: #fff;
+    padding: 1.2rem 2.5rem;
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: all 0.3s;
+  }
+
+  .insta-cta:hover { background: var(--cyan); color: var(--dark); transform: translateY(-2px); }
+
+  .insta-phone {
+    position: relative;
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .phone-frame {
+    width: 320px;
+    height: 580px;
+    background: var(--dark);
+    border-radius: 32px;
+    border: 8px solid #1a232a;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    transform: rotate(8deg);
+    position: relative;
+  }
+
+  .phone-screen {
+    width: 100%; height: 100%;
+    position: relative;
+  }
+
+  .phone-screen video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.9);
+  }
+
+  .phone-overlay-content {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(11, 17, 22, 0.6) 0%, transparent 30%, transparent 70%, rgba(11, 17, 22, 0.9) 100%);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .phone-handle {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .phone-handle .at { opacity: 0.6; }
+
+  .phone-cta {
+    background: rgba(74, 214, 232, 0.95);
+    color: var(--dark);
+    padding: 0.8rem;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* ===== SERVICE AREA (dark with radar) ===== */
+  .service-area {
+    padding: 8rem 3rem;
+    background: var(--dark);
+    overflow: hidden;
+  }
+
+  .area-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    max-width: 1300px;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .area-left h2 {
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    line-height: 1;
+    margin-bottom: 1.8rem;
+    color: #fff;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+  }
+
+  .area-left > p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+  }
+
+  .area-cities {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .city-tag {
+    background: var(--dark-card);
+    border: 1px solid var(--line-light-on-dark);
+    padding: 1rem 1.2rem;
+    border-radius: 4px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    transition: all 0.3s;
+  }
+
+  .city-tag::before {
+    content: '📍';
+    font-size: 0.95rem;
+  }
+
+  .city-tag:hover {
+    border-color: var(--cyan);
+    background: var(--dark-soft);
+  }
+
+  .area-check-btn {
+    background: var(--cyan);
+    color: var(--dark);
+    border: none;
+    padding: 1.1rem 2rem;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .area-check-btn::before { content: '📞'; }
+
+  /* Map frame */
+  .map-frame {
+    position: relative;
+    aspect-ratio: 1/1;
+    max-width: 540px;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line-cyan);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(74, 214, 232, 0.08);
+  }
+
+  .map-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background:
+      linear-gradient(180deg, rgba(11, 17, 22, 0.15) 0%, transparent 30%, transparent 70%, rgba(11, 17, 22, 0.4) 100%);
+    mix-blend-mode: multiply;
+  }
+
+  .map-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    filter: invert(0.92) hue-rotate(180deg) saturate(0.7) brightness(0.95);
+  }
+
+  .map-pin {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pin-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--cyan);
+    border: 2px solid var(--dark);
+    box-shadow: 0 0 0 2px var(--cyan), 0 0 20px var(--cyan-glow);
+    position: relative;
+    z-index: 2;
+  }
+
+  .pin-pulse {
+    position: absolute;
+    top: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--cyan);
+    z-index: 1;
+    animation: pinPing 2.2s ease-out infinite;
+  }
+
+  @keyframes pinPing {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(4); opacity: 0; }
+  }
+
+  .pin-label {
+    margin-top: 0.7rem;
+    background: rgba(11, 17, 22, 0.92);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--cyan);
+    color: #fff;
+    padding: 0.5rem 0.9rem;
+    border-radius: 4px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  /* ===== TESTIMONIALS (light) ===== */
+  .testimonials-section { padding: 8rem 3rem; }
+
+  .testimonials-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .testimonials-header .section-tag {
+    margin-bottom: 1.5rem;
+    justify-content: center;
+  }
+
+  .testimonials-header .section-tag::before,
+  .testimonials-header .section-tag::after {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--cyan-deep);
+  }
+
+  .testimonials-header .section-tag::after { display: block; }
+
+  .testimonials-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1;
+    color: var(--ink-dark);
+  }
+
+  .testimonials-header h2 .italic { color: var(--cyan-deep); }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.8rem;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .review-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 24px rgba(11, 17, 22, 0.06);
+    border: 1px solid var(--line-dark-on-light);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .stars {
+    display: flex;
+    gap: 2px;
+    color: var(--cyan-deep);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+  }
+
+  .review-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--ink-dark);
+    flex-grow: 1;
+  }
+
+  .review-author {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--ink-dark);
+    font-size: 1.05rem;
+    font-weight: 500;
+  }
+
+  .review-author::before { content: '— '; color: var(--cyan-deep); }
+
+  .review-tag {
+    display: inline-block;
+    background: var(--cream-soft);
+    color: var(--cyan-deep);
+    padding: 0.4rem 0.9rem;
+    border-radius: 4px;
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+    align-self: flex-start;
+  }
+
+  /* ===== CONTACT (dark) ===== */
+  .contact-section { padding: 8rem 3rem; background: var(--dark); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .contact-left h2 {
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    line-height: 1;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+  }
+
+  .contact-left h2 .italic { color: var(--cyan); }
+
+  .contact-left > p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    max-width: 460px;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+  }
+
+  .contact-info-list { display: flex; flex-direction: column; gap: 1.8rem; }
+
+  .contact-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.4rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--line-light-on-dark);
+  }
+
+  .contact-row .icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cyan);
+    flex-shrink: 0;
+  }
+
+  .contact-row .lbl {
+    color: var(--ink-mute);
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+
+  .contact-row .val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .contact-row a.val:hover { color: var(--cyan); }
+
+  .quote-form {
+    background: var(--dark-card);
+    border: 1px solid var(--line-light-on-dark);
+    border-top: 2px solid var(--cyan);
+    padding: 2.8rem;
+    border-radius: 8px;
+  }
+
+  .quote-form h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .quote-form > p {
+    color: var(--ink-mute);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+
+  .field { display: flex; flex-direction: column; margin-bottom: 1rem; }
+
+  .field label {
+    font-size: 0.66rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .field input, .field select, .field textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line-light-on-dark);
+    padding: 0.6rem 0;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    transition: border-color 0.3s;
+  }
+
+  .field input::placeholder, .field textarea::placeholder { color: var(--ink-mute); }
+
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none;
+    border-bottom-color: var(--cyan);
+  }
+
+  .field select option { background: var(--dark-card); color: #fff; }
+  .field textarea { resize: vertical; min-height: 80px; }
+
+  .quote-form button {
+    width: 100%;
+    margin-top: 1rem;
+    justify-content: center;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 4rem 3rem 2.5rem;
+    background: #060a0d;
+    border-top: 1px solid var(--line-light-on-dark);
+  }
+
+  .footer-grid {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand p {
+    color: var(--ink-mute);
+    font-size: 0.9rem;
+    margin-top: 1.4rem;
+    max-width: 320px;
+    line-height: 1.6;
+  }
+
+  .footer-col h5 {
+    color: var(--cyan);
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-bottom: 1.4rem;
+    font-weight: 500;
+  }
+
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+
+  .footer-col a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+
+  .footer-col a:hover { color: var(--cyan); }
+
+  .footer-bottom {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line-light-on-dark);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--ink-mute);
+    font-size: 0.82rem;
+  }
+
+  .footer-bottom .italic { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--cyan); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 980px) {
+    nav { padding: 1rem 1.3rem; }
+    .nav-links { gap: 1.2rem; }
+    .nav-links li:not(:last-child) { display: none; }
+    .section, .hero, .philosophy, .instagram, .service-area, .testimonials-section, .contact-section { padding-left: 1.3rem; padding-right: 1.3rem; }
+    .work-gallery { grid-template-columns: 1fr; }
+    .work-tile { aspect-ratio: 16/10; }
+    .service-menu { aspect-ratio: auto; }
+    .process-grid { grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem; }
+    .insta-grid { grid-template-columns: 1fr; gap: 4rem; }
+    .insta-phone { order: -1; }
+    .area-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    .floating-contact .label { display: none; }
+    .philosophy { padding: 6rem 1.3rem; }
+  }
+
+  @media (max-width: 560px) {
+    .hero { padding-top: 6rem; }
+    .process-grid { grid-template-columns: 1fr; }
+    .area-cities { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .phone-frame { width: 260px; height: 480px; }
+    .quote-form { padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-mark">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+        <path d="M12 22V13" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M12 13C12 13 8 9 4 9C4 9 5 12 8 13C5 12 5 16 8 17" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 13C12 13 16 9 20 9C20 9 19 12 16 13C19 12 19 16 16 17" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 13C12 13 10 7 6 5C6 5 8 9 10 9" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 13C12 13 14 7 18 5C18 5 16 9 14 9" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="logo-text">BLUE PALMS</div>
+      <div class="logo-sub">Premium Outdoor Care</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#work">Work &amp; Services</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="tel:4104744838" class="nav-phone">(410) 474-4838 →</a></li>
+  </ul>
+</nav>
+
+<!-- ===== FLOATING CONTACT ===== -->
+<div class="floating-contact">
+  <a href="#contact" class="float-btn">
+    <span class="label">💬 Need help? Chat now!</span>
+    <div class="float-icon-wrap">
+      <div class="float-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <span class="float-badge">1</span>
+    </div>
+  </a>
+  <a href="tel:4104744838" class="float-btn">
+    <span class="label">📞 Call now — we answer fast!</span>
+    <div class="float-icon-wrap">
+      <div class="float-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+    </div>
+  </a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-video-wrapper">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="https://res.cloudinary.com/dycutbccb/video/upload/v1778019039/SnapInsta.to_AQNsqWp048_y5Agka6YdM1ARWfriYEZueEQhGhwMFNigmg-bj326cKu5l7yCE4_kuNbVEfxVR53yOdkFXF2LROP1I-4YCqUdY3b5cv4_e0jomv.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="hero-content">
+    <h1 class="display">Transforming<br>outdoor <span class="italic">spaces.</span></h1>
+    <p class="lede">Blue Palms LLC handles every part of keeping your property looking sharp — from landscape design and mulching to soft washing, gutter cleaning, and grass cutting. One crew, every season.</p>
+    <div class="hero-actions">
+      <a href="tel:4104744838" class="btn-cta">📞 (410) 474-4838</a>
+      <a href="#work" class="btn-ghost">View Our Work →</a>
+    </div>
+  </div>
+
+  <div class="scroll-dot">Scroll</div>
+</section>
+
+<!-- ===== WORK / SERVICES (light, video gallery + service menu) ===== -->
+<section class="section light" id="work">
+  <div class="section-inner">
+    <div class="header-block">
+      <span class="section-tag">The Work</span>
+      <h2 class="display" style="margin-top: 1.5rem;">Watch our <span class="italic">craft.</span></h2>
+      <p class="lede">From the first cut to the final reveal — every project gets the same level of care. Here's what Blue Palms does, in motion.</p>
+      <div class="orbit-dot"></div>
+    </div>
+
+    <div class="work-gallery">
+      <div class="work-tile">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="https://res.cloudinary.com/dycutbccb/video/upload/v1778010514/SnapInsta.to_AQMV67fELcj_fmGecj3WPO6oljC1qhGyUDieb6EFItIwpSk6m16QDlQe9NUN1wB7yckkP0436aVtdASVmapD-ED6p-5NWnH-BwCIDIo_xhptig.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="work-tile">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="https://res.cloudinary.com/dycutbccb/video/upload/v1778011136/SnapInsta.to_AQNAV5pa8YupJ3rSJi4SjgXuPofjdfw1bmBqkCFR5o2zUqEQ1g6Gzk1Javj2v8-lmUAdYs_jwF269Qwdtn8sRZerEzTKS39trnrxJ6M_repaqv.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="service-menu">
+        <div class="menu-tag">Full Service Menu</div>
+        <h3>Everything we <span class="italic">do.</span></h3>
+        <ul class="service-list">
+          <li>
+            <span class="num">01</span>
+            <div>
+              <div class="name">Landscape Design</div>
+              <div class="desc">Custom property design — from concept to install.</div>
+            </div>
+          </li>
+          <li>
+            <span class="num">02</span>
+            <div>
+              <div class="name">Grass Cutting</div>
+              <div class="desc">Weekly &amp; bi-weekly cuts. Crisp lines every time.</div>
+            </div>
+          </li>
+          <li>
+            <span class="num">03</span>
+            <div>
+              <div class="name">Mulching</div>
+              <div class="desc">Fresh mulch installs &amp; bed maintenance.</div>
+            </div>
+          </li>
+          <li class="active">
+            <span class="num">04</span>
+            <div>
+              <div class="name">Soft &amp; Power Washing</div>
+              <div class="desc">Houses, driveways, fences — back to brand new.</div>
+            </div>
+          </li>
+          <li>
+            <span class="num">05</span>
+            <div>
+              <div class="name">Gutter Cleaning</div>
+              <div class="desc">Clear gutters, working downspouts, no surprises.</div>
+            </div>
+          </li>
+          <li>
+            <span class="num">06</span>
+            <div>
+              <div class="name">Weed Removal</div>
+              <div class="desc">Beds, walkways, patios — kept clean.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PHILOSOPHY (dark, big quote) ===== -->
+<section class="philosophy dark" id="philosophy">
+  <div class="philosophy-inner">
+    <div class="quote-mark">"</div>
+    <blockquote class="display">A property is more than landscape — it's the <span class="italic">first impression</span>, the daily view, the place you come home to. We treat every inch of it like our own.</blockquote>
+    <cite>Blue Palms Philosophy</cite>
+  </div>
+</section>
+
+<!-- ===== PROCESS (light) ===== -->
+<section class="section light">
+  <div class="section-inner">
+    <div class="header-block">
+      <span class="section-tag">How It Works</span>
+      <h2 class="display" style="margin-top: 1.5rem;">From first call to <span class="italic">finished work.</span></h2>
+      <p class="lede">Our process is simple and built to keep you in the loop every step of the way.</p>
+      <div class="orbit-dot"></div>
+    </div>
+
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="num">01</div>
+        <h4>Reach Out</h4>
+        <p>Call, text, or fill out the form. We respond within 24 hours, usually faster.</p>
+      </div>
+      <div class="process-step">
+        <div class="num">02</div>
+        <h4>Free Site Visit</h4>
+        <p>We come out, walk the property, and listen to what you actually want.</p>
+      </div>
+      <div class="process-step">
+        <div class="num">03</div>
+        <h4>Real Quote</h4>
+        <p>Honest pricing, no surprise fees. We tell you exactly what's included.</p>
+      </div>
+      <div class="process-step">
+        <div class="num">04</div>
+        <h4>We Get to Work</h4>
+        <p>Crew shows up on time, properly equipped, ready to deliver.</p>
+      </div>
+      <div class="process-step">
+        <div class="num">05</div>
+        <h4>You Enjoy</h4>
+        <p>Sit back. Your property looks finished. Period.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INSTAGRAM (dark with tilted phone) ===== -->
+<section class="instagram dark">
+  <div class="insta-grid">
+    <div class="insta-left">
+      <span class="section-tag">The Portfolio</span>
+      <h2 class="display" style="margin-top: 1.5rem;">See it all on<br><span class="italic">Instagram.</span></h2>
+      <p>Every project, every install, every detail — documented and shared. The work speaks for itself.</p>
+      <a href="https://instagram.com/bluepalmslandscape_" class="insta-cta">@bluepalmslandscape_ →</a>
+    </div>
+    <div class="insta-phone">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <video autoplay muted loop playsinline preload="metadata">
+            <source src="https://res.cloudinary.com/dycutbccb/video/upload/v1778016651/SnapInsta.to_AQPcPGPfi5i0gJYdCY36XOnApS3CpZRWJ8ISGbbGGkwmDokPe04F6JgtCUIoUAtS8WD1G0PyyC6DIDKWg3e0XVCzyRNLAJgHzhN6IsE_kytrod.mp4" type="video/mp4">
+          </video>
+          <div class="phone-overlay-content">
+            <div class="phone-handle"><span class="at">@</span>bluepalmslandscape_</div>
+            <div class="phone-cta">Tap to Follow</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICE AREA (dark with radar) ===== -->
+<section class="service-area">
+  <div class="area-grid">
+    <div class="area-left">
+      <span class="section-tag">Service Area</span>
+      <h2 class="display" style="margin-top: 1.5rem;">Proudly serving the <span class="italic">Maryland area.</span></h2>
+      <p>Based in Maryland with a wide service radius. If you're nearby, we're available — and we always show up on time.</p>
+
+      <div class="area-cities">
+        <div class="city-tag">Baltimore</div>
+        <div class="city-tag">Howard County</div>
+        <div class="city-tag">Anne Arundel</div>
+        <div class="city-tag">Carroll County</div>
+        <div class="city-tag">Harford County</div>
+        <div class="city-tag">Montgomery</div>
+      </div>
+
+      <a href="#contact" class="area-check-btn">Check Your Area</a>
+    </div>
+
+    <div class="map-frame">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d397444.9!2d-76.85!3d39.29!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1700000000000"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen
+        title="Blue Palms LLC Service Area — Maryland">
+      </iframe>
+      <div class="map-pin">
+        <div class="pin-pulse"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-label">Blue Palms — Maryland</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS (light) ===== -->
+<section class="testimonials-section light">
+  <div class="testimonials-header">
+    <span class="section-tag">What Clients Say</span>
+    <h2 class="display" style="margin-top: 1.5rem;">Real homes.<br>Real <span class="italic">results.</span></h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Got my driveway and house soft-washed. Looks brand new. They showed up on time, did exactly what they said, fair price. Already booked them again."</p>
+      <div class="review-author">Mike R.</div>
+      <span class="review-tag">Soft Washing</span>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Hands down the best lawn care in the area. They actually care about how the property looks. Stripes are perfect every visit."</p>
+      <div class="review-author">Jennifer T.</div>
+      <span class="review-tag">Grass Cutting</span>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Mulched and refreshed all our beds before a family event. They finished in one day and the place looked unbelievable. Highly recommend."</p>
+      <div class="review-author">David L.</div>
+      <span class="review-tag">Mulching</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT (dark) ===== -->
+<section class="contact-section" id="contact">
+  <div class="contact-grid">
+    <div class="contact-left">
+      <span class="section-tag">Get In Touch</span>
+      <h2 class="display" style="margin-top: 1.5rem;">Let's transform your <span class="italic">outdoor space.</span></h2>
+      <p>Tell us a little about your property and what you're hoping to fix, refresh, or rebuild. We'll follow up within a business day.</p>
+
+      <div class="contact-info-list">
+        <div class="contact-row">
+          <div class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="lbl">Phone</div>
+            <a href="tel:4104744838" class="val">(410) 474-4838</a>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="lbl">Email</div>
+            <a href="mailto:hello@bluepalmslandscape.com" class="val">hello@bluepalmslandscape.com</a>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </div>
+          <div>
+            <div class="lbl">Instagram</div>
+            <a href="https://instagram.com/bluepalmslandscape_" class="val">@bluepalmslandscape_</a>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="lbl">Service Area</div>
+            <span class="val">Maryland Area</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote-form">
+      <h3>Request a free quote</h3>
+      <p>No pressure, no obligation. Just an honest conversation.</p>
+      <div class="form-row">
+        <div class="field"><label>First name</label><input type="text" placeholder="Jane" /></div>
+        <div class="field"><label>Last name</label><input type="text" placeholder="Doe" /></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Phone</label><input type="tel" placeholder="410.000.0000" /></div>
+        <div class="field"><label>Email</label><input type="email" placeholder="you@email.com" /></div>
+      </div>
+      <div class="field">
+        <label>Service of interest</label>
+        <select>
+          <option>Landscape Design</option>
+          <option>Grass Cutting</option>
+          <option>Mulching</option>
+          <option>Soft &amp; Power Washing</option>
+          <option>Gutter Cleaning</option>
+          <option>Weed Removal</option>
+          <option>Multiple / Not sure</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Tell us about your property</label>
+        <textarea placeholder="A few details about what you're hoping for..."></textarea>
+      </div>
+      <button class="btn-cta" onclick="event.preventDefault(); this.textContent='✓ We\'ll be in touch'; this.style.background='var(--cyan-deep)'; this.style.color='#fff';">Send Request →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo">
+        <div class="logo-mark">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <path d="M12 22V13" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M12 13C12 13 8 9 4 9C4 9 5 12 8 13C5 12 5 16 8 17" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 13C12 13 16 9 20 9C20 9 19 12 16 13C19 12 19 16 16 17" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 13C12 13 10 7 6 5C6 5 8 9 10 9" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 13C12 13 14 7 18 5C18 5 16 9 14 9" stroke="#4ad6e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="logo-text">BLUE PALMS</div>
+          <div class="logo-sub">Premium Outdoor Care</div>
+        </div>
+      </a>
+      <p>Transforming outdoor spaces across the Maryland area with patient craft, honest pricing, and an unwavering eye for detail.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#work">Landscape Design</a></li>
+        <li><a href="#work">Grass Cutting</a></li>
+        <li><a href="#work">Mulching</a></li>
+        <li><a href="#work">Soft Washing</a></li>
+        <li><a href="#work">Gutter Cleaning</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#philosophy">Philosophy</a></li>
+        <li><a href="#work">Our Work</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#contact">Free Quote</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Connect</h5>
+      <ul>
+        <li><a href="tel:4104744838">(410) 474-4838</a></li>
+        <li><a href="mailto:hello@bluepalmslandscape.com">Email Us</a></li>
+        <li><a href="https://instagram.com/bluepalmslandscape_">Instagram</a></li>
+        <li><a href="https://linktr.ee/BluePalmsLandscaping_">Linktree</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Blue Palms LLC. All rights reserved.</span>
+    <span>Built with <span class="italic">care</span> in Maryland.</span>
+  </div>
+</footer>
+
+<script>
+  if ('IntersectionObserver' in window) {
+    const videos = document.querySelectorAll('.work-tile video, .phone-screen video');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const v = entry.target;
+        if (entry.isIntersecting) v.play().catch(() => {});
+        else v.pause();
+      });
+    }, { threshold: 0.15 });
+    videos.forEach(v => obs.observe(v));
+  }
+</script>
+
+</body>
+</html>
